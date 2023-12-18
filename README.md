@@ -379,6 +379,7 @@ utilize o comando abaixo:
 # Foreign Key - Sintaxe
 
 ● Para criar uma chave estrangeira, utilize o comando abaixo:
+
     CREATE TABLE Person (
         nome VARCHAR(255),
         trabalho_id INT
