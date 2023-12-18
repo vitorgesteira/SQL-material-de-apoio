@@ -11,11 +11,9 @@
 
 ![tipos de bancos de dados](https://github.com/vitorgesteira/SQL-material-de-apoio/assets/54457455/5f33e969-9a31-4131-96d8-c49378f88f5b)
 
-
 ● Definir - manipular - controlar - transacionar - recuperar dados
 
 ● Existem divisões para cada conceito no SQL e os mais comuns são DML, DDL e DCL.
-
 
 # São 5 Divisões
 
@@ -123,7 +121,7 @@
 
 ● Por exemplo, uma tabela que contém dados de funcionários de uma empresa pode conter uma linha para cada funcionário e colunas representando as informações sobre o funcionário, como número, nome, endereço, cargo e número do telefone residencial do funcionário.
 
-# Criar e apagar tabela:
+# Criar tabela:
     CREATE TABLE nome-tabela (
         campo1 TIPO CONSTRAINT,
         campo2 TIPO CONSTRAINT
@@ -145,7 +143,7 @@
         id_produto INT NOT NULL,
         descricao_tecnica TEXT NOT NULL,
         FOREIGN KEY(id_produto) REFERENCES tb_produtos(id_produto)
-    )
+    );
 
 # Tipos de dados:
 
@@ -174,7 +172,6 @@
     ○ BOOL / BOOLEAN - Valores binários 0 / 1
     ○ BLOB / MEDIUMBLOB/ TINYBLOB - Campo com tamanho máximo de 65535 caracteres binários
         
-
 # Constraints (Restrições)
 
 ● As restrições SQL são usadas para especificar regras para os dados em uma tabela. As restrições são usadas para limitar o tipo de dados que podem entrar em uma tabela.
@@ -186,8 +183,6 @@
     ○ DEFAULT ‘VALUE’ - Define um valor padrão para uma coluna quando nenhum valor é especificado
     ○ CHECK (CONDITION) - Garante que todos os valores em uma coluna satisfaçam uma condição específica
     ○ INDEX - Usado para criar e recuperar dados do banco de dados muito rapidamente
-
-
 
 # Alterando uma Coluna (ALTER);
 ● Para alterar uma coluna no banco de dados, utilize o comando abaixo:
@@ -263,6 +258,14 @@ utilize o comando abaixo:
     FROM nome-tabela 
     WHERE campo BETWEEN valor1 AND valor2;
 
+SELECT - Filtros com operador BETWEEN
+
+	WHERE  							WHERE
+		idade >= 18 AND idade <= 21 				idade BETWEEN 18 AND 21
+
+	WHERE  							WHERE
+		data >= '2018-07-01 AND data <= '2018-07-31		data BETWEEN '2018-07-01' AND '2018-07-31'
+
 # Order By
 ● O ORDER BY é usado para classificar o conjunto de resultados em ordem crescente ASC ou decrescente DESC;
 
@@ -270,7 +273,7 @@ utilize o comando abaixo:
 
     SELECT campo 
     FROM nome-tabela 
-    ORDER BY campo1, campo2, ... ASC | DESC
+    ORDER BY campo1, campo2, ... ASC | DESC;
 
 # Wildcards
 ● Wildcards (Cartões Coringa) são utilizados na consultas SQL junto com o operador LIKE para achar dados de maneira mais personalizada.
@@ -288,13 +291,13 @@ utilize o comando abaixo:
 
     SELECT campo 
     FROM nome-tabela 
-    WHERE campo LIKE ‘%filtro%’
+    WHERE campo LIKE ‘%filtro%’;
 
 ● Utilizando o wildcard _:
 
     SELECT campo 
     FROM nome-tabela 
-    WHERE campo LIKE ‘_filtro’
+    WHERE campo LIKE ‘_filtro’;
 
 # Atualizando Registros
 ● Para atualizar registros, basta seguir o comando abaixo:
@@ -380,10 +383,11 @@ utilize o comando abaixo:
 
 ● Para criar uma chave estrangeira, utilize o comando abaixo:
 
-    CREATE TABLE Person (
-        nome VARCHAR(255),
-        trabalho_id INT
-        FOREIGN KEY trabalho_id REFERENCES Trabalho(id)
+	CREATE TABLE Person (
+		nome VARCHAR(255),
+		trabalho_id INT
+		FOREIGN KEY trabalho_id REFERENCES Trabalho(id)
+	);
 
 # Relacionamento 1 : N
 
