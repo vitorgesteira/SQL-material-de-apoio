@@ -31,24 +31,33 @@
 ● A DDL (Data Definition Language) engloba os comandos de definição do banco de dados. Interagem com os objetos do banco. E alguns deles são:
 
     ○ CREATE - o comando Create cria objetos;
+
     ○ DROP - o comando Drop exclui objetos do banco de dados;
+
     ○ ALTER - o ALTER altera objetos já existentes, seja modificando, excluindo ou adicionando;
+
     ○ TRUNCATE - exclui todo o conteúdo de uma tabela e redefine sua identidade para o valor inicial.
 
 # DML
 ● A DML (Data Manipulation Language) corresponde aos comandos de manipulação dos dados. E são eles:
 
     ○ SELECT - o Select recupera dados de determinado lugar;
+
     ○ INSERT - essa instrução insere dados a uma ou mais tabelas;
+
     ○ UPDATE - atualiza os dados existentes em uma ou mais tabelas;
+
     ○ DELETE - exclui os registros de uma tabela ou mais. Quando não acompanhado de uma cláusula, todas as linhas são removidas.
 
 # Comandos SGBD
 ● Alguns comandos de gerenciamento básico do SGBD são importantes de serem aprendidos. Os principais são:
 
     ○ SHOW DATABASES - mostra todos os bancos de dados do MySQL;
+
     ○ SHOW TABLES - mostrar todas as tabelas de um banco de dados;
+
     ○ USE DATABASE_NAME - se conecta a um banco de dados;
+
     ○ DESCRIBE TABLE_NAME - mostra os detalhes de uma tabela.
 
 # Modelagem de um Banco Relacional
@@ -150,26 +159,35 @@
 ● Campos de texto:
 
     ○ Text - tamanho variavel que armazena uma grande quantidade de caracteres
+
     ○ VARCHAR(M) - String de tamanho variável, até 65535 caracteres
+
     ○ CHAR(M) - String que ocupa tamanho fixo entre 0 e 255 caracteres
+
     ○ MEDIUMTEXT - Permite armazenar até 16.777.215 caracteres
+
     ○ LONGTEXT - Permite armazenar até 4.294.967.295 caracteres
 
 ● Campos numericos:
 
     ○ INT - valores numericos inteiros
+
     ○ FLOAT(M,D) - valores numericos fracionados
+
     ○ DECIMAL(M,D) - Ponto decimal com M dígitos no total (precisão) e D casas decimais (escala)
 
 ● Campos de data e hora:
 
     ○ DATE - Uma data de 01/01/1000 a 31/12/9999, no formato YYYY-MM-DD
+
     ○ TIME - Hora apenas, no formato HH:MM:SS
+
     ○ DATETIME - Uma combinação de data e hora de 01/01/1000 00:00:00 a 31/12/9999 23:59:59, no formato YYYY-MM-DD HH:MM:SS
     
 ● Campos Booleano: 
 
     ○ BOOL / BOOLEAN - Valores binários 0 / 1
+
     ○ BLOB / MEDIUMBLOB/ TINYBLOB - Campo com tamanho máximo de 65535 caracteres binários
         
 # Constraints (Restrições)
@@ -177,29 +195,53 @@
 ● As restrições SQL são usadas para especificar regras para os dados em uma tabela. As restrições são usadas para limitar o tipo de dados que podem entrar em uma tabela.
 
     ○ NOT NULL - Garante que uma coluna não pode ter um valor NULL
+
     ○ UNIQUE - Garante que todos os valores em uma coluna sejam diferentes
+
     ○ PRIMARY KEY - Uma combinação de NOT NULL e UNIQUE. Identifica exclusivamente cada linha em uma tabela
+
     ○ FOREIGN KEY - Identifica exclusivamente uma linha/registro em outra tabela
+
     ○ DEFAULT ‘VALUE’ - Define um valor padrão para uma coluna quando nenhum valor é especificado
+
     ○ CHECK (CONDITION) - Garante que todos os valores em uma coluna satisfaçam uma condição específica
+
     ○ INDEX - Usado para criar e recuperar dados do banco de dados muito rapidamente
+
+# Alterando nome da tabela:
+    RENAME TABLE table_name 
+    TO new table_name;
 
 # Alterando uma Coluna (ALTER);
 ● Para alterar uma coluna no banco de dados, utilize o comando abaixo:
 
-    ALTER TABLE nome-tabela
-    ADD COLUMN campo TIPO CONSTRAINT;
+ADD - permite a inclusão de uma nova coluna em uma tabela:
 
-    ALTER TABLE nome-tabela
-    DROP COLUMN campo;
+    ALTER TABLE table-name
+    ADD COLUMN column-name TIPO CONSTRAINT;
 
-    ALTER TABLE nome-tabela
-    MODIFY COLUMN campo TIPO CONSTRAINT;
+CHANGE - permite a alteração do nome de uma coluna e de suas propriedades, como por exemplo o tipo:
+
+    ALTER TABLE table-name
+    CHANGE column-name new-column-name TIPO CONSTRAINT;
+
+obs: importante o nome da tabela e o tipo
+
+MODIFY COLUMN - altera o tipo de dados de uma coluna em uma tabela, use a seguinte sintaxe:
+
+    ALTER TABLE table-name
+    MODIFY COLUMN column-name TIPO CONSTRAINT;
+
+
+DROP - permite a remoção de uma coluna da tabela:
+
+    ALTER TABLE table-name
+    DROP COLUMN column-name;    
 
 # Apagando uma Tabela
 ● Para apagar uma tabela, utilize o comando abaixo:
 
-    DROP TABLE nome-tabela;
+    DROP TABLE table-name;
 
 # DML - Data Manipulation Language
 
@@ -207,7 +249,7 @@
 ● Após criar a tabela, agora é necessário inserir dados. Para inserir um registro,
 utilize o comando abaixo:
 
-    INSERT INTO nome-tabela (campo1, campo2)
+    INSERT INTO table-name (campo1, campo2)
     VALUES (valor1, valor2);
 
 # Inserindo Múltiplos Registros
@@ -238,6 +280,29 @@ utilize o comando abaixo:
     FROM pessoa 
     WHERE nome = ‘John Doe’;
 
+Exemplos:
+
+    SELECT id_curso, nome_curso 
+    FROM tb_cursos 
+    WHERE investimento < 500.00;
+
+    SELECT id_curso, nome_curso 
+    FROM tb_cursos 
+    WHERE investimento < 500.00 AND carga_horaria > 30;
+
+Operadores de comparação: [...] WHERE investimento < 500.00
+
+    = valor da esquerda igual o valor da direita
+	< valor da esquerda menor que o valor da direita 
+	<= valor da esquerda menor ou igual ao valor da direita
+	> valor da esquerda maior que o valor da direita
+	>= valor da esquerda maior ou igual ao valor da direita
+
+Operadores logicos: [...] WHERE investimento < 500.00 AND carga_horaria > 30
+
+    AND - Todas as operações de comparação devem ser verdadeiras
+	OR - Pelo menos uma das operações de comparação deve ser verdadeira
+
 # IN
 ● O operador IN permite especificar vários valores em uma cláusula WHERE.
 
@@ -246,6 +311,14 @@ utilize o comando abaixo:
     SELECT campo 
     FROM nome-tabela 
     WHERE campo IN (value1, value2, ...);
+
+ex:
+
+    [...] WHERE interesse = 'Jogos' OR interesse = 'Música' OR interesse = 'Esporte'
+
+    [...] WHERE interesse IN('Jogos', 'Musica', 'Esporte')
+
+    [...] WHERE interesse NOT IN('Jogos', 'Musica', 'Esporte')
 
 # Between
 ● O operador BETWEEN seleciona valores dentro de um determinado intervalo.
@@ -258,13 +331,41 @@ utilize o comando abaixo:
     FROM nome-tabela 
     WHERE campo BETWEEN valor1 AND valor2;
 
-SELECT - Filtros com operador BETWEEN
+Filtros com operador BETWEEN
 
-	WHERE  							WHERE
-		idade >= 18 AND idade <= 21 				idade BETWEEN 18 AND 21
+	[...] WHERE idade >= 18 AND idade <= 21 
+    [...] WHERE idade BETWEEN 18 AND 21
 
-	WHERE  							WHERE
-		data >= '2018-07-01 AND data <= '2018-07-31		data BETWEEN '2018-07-01' AND '2018-07-31'
+    [...] WHERE data >= '2018-07-01 AND data <= '2018-07-31
+    [...] WHERE data BETWEEN '2018-07-01' AND '2018-07-31'
+
+# LIKE
+
+● Permite realizar filtros com base em uma pesquisa de caracteres dentro de uma coluna textual
+
+● O operador LIKE é usado em uma cláusula WHERE para procurar um padrão especificado em uma coluna.
+
+● Existem dois caracteres curinga frequentemente usados ​​em conjunto com o operador LIKE:
+
+    WHERE nome LIKE 'Evelyn';
+
+● Caracteres curingas:
+
+    % Indica que pode haver a existência de qualquer conjunto de caracter no texto:
+
+        WHERE nome LIKE '%e'
+		WHERE nome LIKE '%a%'
+		WHERE nome LIKE 'C%'
+
+    _ Indica que pode haver a existência de um ou mais caracteres em uma posição especifica do texto:
+
+        WHERE nome LIKE '_riel'
+		WHERE nome LIKE '_ru_'
+		WHERE nome LIKE 'I_ _'
+    
+    Pode ser usado os dois:
+
+        WHERE Nome LIKE '%tt_'
 
 # Order By
 ● O ORDER BY é usado para classificar o conjunto de resultados em ordem crescente ASC ou decrescente DESC;
@@ -275,16 +376,94 @@ SELECT - Filtros com operador BETWEEN
     FROM nome-tabela 
     ORDER BY campo1, campo2, ... ASC | DESC;
 
+ex:
+
+    SELECT
+		<coluna(s)>
+	FROM 
+		<tabela(s)>
+	WHERE
+		<FILTRO(S)>
+	ORDER BY
+		idade ASC, nome DESC
+
+*Ascending (valor default)
+
+*Descending
+
+# Limitando retorno
+
+1º parâmetro = OFFSET (define apartir de onde vai ser a consulta)
+
+2º parâmetro = LIMIT  (define quantos dados vai trazer na consulta)
+
+    SELECT
+		<coluna(s)>
+	FROM 
+		<tabela(s)>
+	WHERE 
+		<filtro(s)>
+	ORDER BY
+		<ordenação>
+	LIMIT
+		5
+	OFFSET
+		2
+
+    ou 
+		
+	LIMIT
+		2, 5
+
+ex:
+
+    SELECT * FROM `tb_alunos` LIMIT 25;
+
+	SELECT * FROM `tb_alunos` ORDER BY id_aluno DESC LIMIT 25;
+
+	SELECT * FROM `tb_alunos` LIMIT 4 OFFSET 0;
+
+	SELECT * FROM `tb_alunos` LIMIT 4 OFFSET 4;
+
+	SELECT * FROM `tb_alunos` LIMIT 4 OFFSET 8;
+
+# SELECT - Funções de agregação: MAX, MIN, AVG
+
+    SELECT
+		funções de agregação
+	FROM
+		<tabela(s)>
+	WHERE
+		<filtro(s)>
+
+MIN (coluna) - Retorna o menor valor de todos os registros com base em uma coluna
+
+    SELECT MIN(investimento) FROM `tb_cursos`;
+
+    SELECT MIN(investimento) FROM `tb_cursos` WHERE ativo = true;
+
+MAX (coluna) - Retorna o maior valor de todos os registros com base em uma coluna
+
+    SELECT MAX(investimento) FROM `tb_cursos` WHERE ativo = true;
+
+AVG (coluna) - Retorna a média de todos os registros com base em uma coluna
+
+    SELECT AVG(investimento) FROM `tb_cursos` WHERE ativo = true;
+
+    
+    
+
 # Wildcards
+
 ● Wildcards (Cartões Coringa) são utilizados na consultas SQL junto com o operador LIKE para achar dados de maneira mais personalizada.
 
 ● Com esses operadores é possível buscar dados que contenham, começam ou terminam com certos valores.
 
 ● Os Wildcards são:
 
-    ○ % - significa vários caracteres de qualquer coisa.
+    % - significa vários caracteres de qualquer coisa.
 
-    ○ _ - significa um carácter de qualquer coisa.
+    _ - significa um carácter de qualquer coisa.
 
 ## Wildcards - Exemplos
 ● Utilizando o wildcard %:
@@ -328,7 +507,7 @@ SELECT - Filtros com operador BETWEEN
     ○ um-para-um ( 1 : 1 )
     ○ muitos-para-muitos ( N : N)
 
-● Com o tempo você se acostuma e identifica em qual desses níveis a sua regra de negócio se encaixa.
+Com o tempo você se acostuma e identifica em qual desses níveis a sua regra de negócio se encaixa.
 
 # Primary Key
 
@@ -386,7 +565,7 @@ SELECT - Filtros com operador BETWEEN
 	CREATE TABLE Person (
 		nome VARCHAR(255),
 		trabalho_id INT
-		FOREIGN KEY trabalho_id REFERENCES Trabalho(id)
+		FOREIGN KEY (trabalho_id) REFERENCES Trabalho(id)
 	);
 
 # Relacionamento 1 : N
@@ -409,7 +588,7 @@ DDL:
 	    nome VARCHAR(50) NOT NULL,
 	    id_livro INT NOT NULL,
 	    PRIMARY KEY (id),
-	    FOREIGN KEY id_livro REFERENCES livros(id)
+	    FOREIGN KEY (id_livro) REFERENCES livros(id)
     ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
     -- Cria a tabela Livros --
@@ -463,7 +642,7 @@ DDL:
         cidade VARCHAR(60) NOT NULL,
         id_cliente INT NOT NULL,
         PRIMARY KEY (id),
-    FOREIGN KEY id_cliente REREFERENCES clientes(id)
+        FOREIGN KEY (id_cliente) REFERENCES clientes(id)
     ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=LATIN1;
 
     -- Cria a tabela Clientes
@@ -502,7 +681,7 @@ DML:
 DDL:
 
     -- Cria a tabela Cliente --
-    CREATE TABLE IF NOT EXISTS clientes (
+    CREATE TABLE IF NOT EXISTS cliente (
         id INT NOT NULL AUTO_INCREMENT,
         nome VARCHAR(50) NOT NULL,
         PRIMARY KEY (id)
@@ -521,8 +700,8 @@ DDL:
         id_cliente INT NOT NULL,
         id_produto INT NOT NULL,
         PRIMARY KEY (id),
-    FOREIGN KEY id_cliente REFERENCES clientes(id),
-    FOREIGN KEY id_produto REFERENCES produtos(id)
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id)
     ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 DML:
@@ -574,9 +753,25 @@ DML:
 
 ● Com isso, serão retornados apenas os registros que existem na intercessão, entre chave estrangeira e chave primária.
 
+![inner_join](https://github.com/vitorgesteira/SQL-material-de-apoio/assets/54457455/08c8ba93-1c3a-4a1a-b741-d29efca8d23e)
+
+
     SELECT * FROM TABELA_1 t1
     INNER JOIN TABELA_2 t2
     ON t1.chave_estrangeira = t2.chave_primaria
+
+ex:
+
+    SELECT * FROM compras 
+    INNER JOIN cliente ON compras id_cliente = cliente.id 
+    INNER JOIN produtos ON compras.id_produto = produtos.id;
+
+ex:
+
+    SELECT compras.id, cliente.nome, produtos.nome
+    FROM compras 
+    INNER JOIN cliente ON compras.id_cliente = cliente.id 
+    INNER JOIN produtos ON compras.id_produto = produtos.id;
 
 # LEFT JOIN
 
@@ -584,9 +779,18 @@ DML:
 
 ● Com isso, serão retornados apenas os registros que existem na intercessão e no lado esquerdo da intercessão, entre chave estrangeira e chave primária.
 
+![left_join](https://github.com/vitorgesteira/SQL-material-de-apoio/assets/54457455/ccc6505c-f8ab-4daa-bda7-8ac2c3faeaad)
+
+
     SELECT * FROM TABELA_1 t1
     LEFT JOIN TABELA_2 t2
     ON t1.chave_estrangeira = t2.chave_primaria
+
+ex:
+
+    SELECT * FROM produtos
+    LEFT JOIN compras
+    ON compras.id_produto = produtos.id;
 
 # RIGHT JOIN
 
@@ -594,9 +798,20 @@ DML:
 
 ● Com isso, serão retornados apenas os registros que existem na intercessão e no lado direito da intercessão, entre chave estrangeira e chave primária.
 
+![right](https://github.com/vitorgesteira/SQL-material-de-apoio/assets/54457455/a84804ff-ed23-4d53-8cd5-8315d54aff23)
+
+
+
+
     SELECT * FROM TABELA_1 t1
     RIGHT JOIN TABELA_2 t2
     ON t1.chave_estrangeira = t2.chave_primaria
+
+ex:
+
+    SELECT * FROM compras
+    RIGHT JOIN produtos
+    ON compras.id_produto = produtos.id;
 
 # CROSS JOIN
 
@@ -604,7 +819,29 @@ DML:
 
 ● Com isso, serão retornados todos os registros que existem na intercessão e no lado esquerdo e direito da intercessão, entre chave estrangeira e chave primária.
 
+
+
     SELECT * FROM TABELA_1 t1
     CROSS JOIN TABELA_2 t2
     ON t1.chave_estrangeira = t2.chave_primaria
 
+
+# Alias - Apelidando tabelas
+
+    SELECT compras.id, cliente.nome, produtos.nome 
+    FROM compras 
+    INNER JOIN cliente ON compras.id_cliente = cliente.id 
+    INNER JOIN produtos ON compras.id_produto = produtos.id; 
+
+ex: 
+
+    SELECT compras.id AS Pedido, cliente.nome AS Cliente, produtos.nome AS Produto 
+    FROM compras 
+    INNER JOIN cliente ON compras.id_cliente = cliente.id 
+    INNER JOIN produtos ON compras.id_produto = produtos.id;
+
+ex:
+
+    SELECT * FROM produtos AS p 
+    LEFT JOIN compras AS c 
+    ON (p.id = c.id_produto);
